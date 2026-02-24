@@ -1362,6 +1362,22 @@ declare class Renderer {
         dstLevel?: number,
     ): void;
     /**
+     * Copies data of the given source buffer attribute into a destination buffer attribute.
+     *
+     * @param srcAttribute The source buffer attribute.
+     * @param dstAttribute The destination buffer attribute.
+     * @param count The number of items to copy. If `null`, the overlapping range is copied.
+     * @param srcIndex The source start index (in items).
+     * @param dstIndex The destination start index (in items).
+     */
+    copyBufferToBuffer(
+        srcAttribute: BufferAttribute,
+        dstAttribute: BufferAttribute,
+        count?: number | null,
+        srcIndex?: number,
+        dstIndex?: number,
+    ): void;
+    /**
      * Reads pixel data from the given render target.
      *
      * @async
