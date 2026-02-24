@@ -541,6 +541,7 @@ export const subgroupShuffleXor: typeof TSL.subgroupShuffleXor;
 export const subgroupSize: typeof TSL.subgroupSize;
 export const subgroupXor: typeof TSL.subgroupXor;
 export const tan: typeof TSL.tan;
+export const tanh: typeof TSL.tanh;
 export const tangentGeometry: typeof TSL.tangentGeometry;
 export const tangentLocal: typeof TSL.tangentLocal;
 export const tangentView: typeof TSL.tangentView;

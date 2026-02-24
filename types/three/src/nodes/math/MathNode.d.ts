@@ -20,6 +20,7 @@ export type MathNodeMethod1 =
     | typeof MathNode.SIN
     | typeof MathNode.COS
     | typeof MathNode.TAN
+    | typeof MathNode.TANH
     | typeof MathNode.ASIN
     | typeof MathNode.ACOS
     | typeof MathNode.ATAN
@@ -79,6 +80,7 @@ export default class MathNode extends TempNode {
     static SIN: "sin";
     static COS: "cos";
     static TAN: "tan";
+    static TANH: "tanh";
     static ASIN: "asin";
     static ACOS: "acos";
     static ATAN: "atan";
@@ -251,6 +253,7 @@ interface ArcTanFunction {
 export const sin: TrigonometricFunction;
 export const cos: TrigonometricFunction;
 export const tan: TrigonometricFunction;
+export const tanh: TrigonometricFunction;
 export const asin: TrigonometricFunction;
 export const acos: TrigonometricFunction;
 export const atan: ArcTanFunction;
@@ -259,6 +262,7 @@ declare module "../core/Node.js" {
         sin: () => Node<"float">;
         cos: () => Node<"float">;
         tan: () => Node<"float">;
+        tanh: () => Node<"float">;
         asin: () => Node<"float">;
         acos: () => Node<"float">;
         atan: (x?: FloatOrNumber) => Node<"float">;
@@ -267,6 +271,7 @@ declare module "../core/Node.js" {
         sin: () => Node<TVec>;
         cos: () => Node<TVec>;
         tan: () => Node<TVec>;
+        tanh: () => Node<TVec>;
         asin: () => Node<TVec>;
         acos: () => Node<TVec>;
     }
