@@ -359,13 +359,14 @@ declare class Renderer {
      */
     private _background;
     /**
+     * Cache for the fullscreen quad.
      * This fullscreen quad is used for internal render passes
      * like the tone mapping and color space output pass.
      *
      * @private
-     * @type {QuadMesh}
+     * @type {Map<Texture,QuadMesh>}
      */
-    private _quad;
+    private _quadCache;
     /**
      * A reference to the current render context.
      *
@@ -391,13 +392,12 @@ declare class Renderer {
      */
     private _transparentSort;
     /**
-     * The framebuffer target.
+     * Cache of framebuffer targets per canvas target.
      *
      * @private
-     * @type {?RenderTarget}
-     * @default null
+     * @type {Map<CanvasTarget, RenderTarget>}
      */
-    private _frameBufferTarget;
+    private _frameBufferTargets;
     /**
      * The clear color value.
      *
@@ -984,7 +984,7 @@ declare class Renderer {
      * Defines the viewport.
      *
      * @param {number} x - The horizontal coordinate for the upper left corner of the viewport origin in logical pixel unit.
-     * @param {number} y - The vertical coordinate for the upper left corner of the viewport origin  in logical pixel unit.
+     * @param {number} y - The vertical coordinate for the upper left corner of the viewport origin in logical pixel unit.
      * @param {number} width - The width of the viewport in logical pixel unit.
      * @param {number} height - The height of the viewport in logical pixel unit.
      * @param {number} minDepth - The minimum depth value of the viewport. WebGPU only.
@@ -1171,9 +1171,9 @@ declare class Renderer {
     /**
      * Sets the output render target for the renderer.
      *
-     * @param {Object} renderTarget - The render target to set as the output target.
+     * @param {?RenderTarget} renderTarget - The render target to set as the output target.
      */
-    setOutputRenderTarget(renderTarget: RenderTarget): void;
+    setOutputRenderTarget(renderTarget: RenderTarget | null): void;
     /**
      * Returns the current output target.
      *
@@ -1477,8 +1477,7 @@ declare class Renderer {
         passId?: string | null,
     ): void;
     /**
-     * Checks if the given compatibility is supported by the selected backend. If the
-     * renderer has not been initialized, this method always returns `false`.
+     * Checks if the given compatibility is supported by the selected backend.
      *
      * @param {string} name - The compatibility's name.
      * @return {boolean} Whether the compatibility is supported or not.

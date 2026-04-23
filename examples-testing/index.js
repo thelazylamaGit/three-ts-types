@@ -58,8 +58,8 @@ const exceptionList = [
     'webgpu_reflection_blurred',
     'webgpu_sandbox',
     'webgpu_shadertoy',
-    'webgpu_shadowmap_opacity',
     'webgpu_skinning_points',
+    'webgpu_sky',
     'webgpu_tsl_compute_attractors_particles',
     'webgpu_tsl_editor',
     'webgpu_tsl_transpiler',
@@ -76,8 +76,8 @@ const exceptionList = [
     'webxr_xr_cubes',
     'webxr_xr_dragging',
     'webxr_xr_haptics',
+    'webxr_xr_marchingcubes',
     'webxr_xr_paint',
-    'webxr_xr_sculpt',
     'physics_ammo_break',
     'physics_ammo_cloth',
     'physics_ammo_rope',
@@ -108,7 +108,7 @@ for (const section of Object.values(examplesFiles)) {
             encoding: 'utf-8',
         });
         const results = re.exec(fileContents);
-        const options = await prettier.resolveConfig(file);
+        const options = await prettier.resolveConfig(import.meta.filename);
         const formattedFile = await prettier.format(results[1], { ...options, parser: 'babel' });
         fs.writeFileSync(path.join(outDir, `${file}.ts`), formattedFile);
     }
