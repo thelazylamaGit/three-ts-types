@@ -176,6 +176,11 @@ export class BufferAttribute {
     onUpload(callback: () => void): this;
 
     /**
+     * Frees the GPU-related resources allocated by this instance.
+     */
+    dispose(): void;
+
+    /**
      * Set {@link BufferAttribute.usage | usage}
      * @remarks
      * After the initial use of a buffer, its usage cannot be changed. Instead, instantiate a new one and set the desired usage before the next render.
