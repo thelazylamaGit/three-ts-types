@@ -144,6 +144,7 @@ export default class MathNode extends TempNode {
 
 type FloatOrNumber = Node<"float"> | number;
 type IntOrNumber = Node<"int"> | number;
+type UintOrNumber = Node<"uint"> | number;
 type FloatVector = Node<"vec2"> | Node<"vec3"> | Node<"vec4">;
 type FloatVectorOrNumber = FloatOrNumber | Node<"vec2"> | Node<"vec3"> | Node<"vec4">;
 
@@ -460,6 +461,8 @@ declare module "../core/Node.js" {
 
 interface MinMax {
     (x: FloatOrNumber, y: FloatOrNumber, ...params: FloatOrNumber[]): Node<"float">;
+    (x: IntOrNumber, y: IntOrNumber, ...params: IntOrNumber[]): Node<"int">;
+    (x: UintOrNumber, y: UintOrNumber, ...params: UintOrNumber[]): Node<"uint">;
     (x: Vec2OrLessOrFloat, y: Vec2OrLessOrFloat, ...params: Vec2OrLessOrFloat[]): Node<"vec2">;
     (x: Vec3OrLessOrFloat, y: Vec3OrLessOrFloat, ...params: Vec3OrLessOrFloat[]): Node<"vec3">;
     (x: Vec4OrLessOrFloat, y: Vec4OrLessOrFloat, ...params: Vec4OrLessOrFloat[]): Node<"vec4">;
@@ -471,6 +474,12 @@ interface MinMaxFloatExtension {
     (y: Vec2OrLessOrFloat, ...params: Vec2OrLessOrFloat[]): Node<"vec2">;
     (y: Vec3OrLessOrFloat, ...params: Vec3OrLessOrFloat[]): Node<"vec3">;
     (y: Vec4OrLessOrFloat, ...params: Vec4OrLessOrFloat[]): Node<"vec4">;
+}
+interface MinMaxIntExtension {
+    (y: IntOrNumber, ...params: IntOrNumber[]): Node<"int">;
+}
+interface MinMaxUintExtension {
+    (y: UintOrNumber, ...params: UintOrNumber[]): Node<"uint">;
 }
 interface MinMaxVec2Extension {
     (y: Vec2OrLessOrFloat, ...params: Vec2OrLessOrFloat[]): Node<"vec2">;
@@ -488,6 +497,14 @@ declare module "../core/Node.js" {
     interface FloatExtensions {
         min: MinMaxFloatExtension;
         max: MinMaxFloatExtension;
+    }
+    interface IntExtensions {
+        min: MinMaxIntExtension;
+        max: MinMaxIntExtension;
+    }
+    interface UintExtensions {
+        min: MinMaxUintExtension;
+        max: MinMaxUintExtension;
     }
     interface Vec2Extensions {
         min: MinMaxVec2Extension;
