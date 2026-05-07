@@ -47,6 +47,7 @@ type NumberToVec3<TNum extends NumType> = `${NumberToVec[TNum]}3`;
 type NumberToVec4<TNum extends NumType> = `${NumberToVec[TNum]}4`;
 
 type Number<TNum extends NumType> = Node<TNum> | number;
+type FloatNodeParameter = Node<"float"> | Node<"int"> | Node<"uint"> | number;
 type Vec2OrLessOrNumber<TNum extends NumType> = Number<TNum> | Node<NumberToVec2<TNum>>;
 type Vec3OrLessOrNumber<TNum extends NumType> = Vec2OrLessOrNumber<TNum> | Node<NumberToVec3<TNum>>;
 type Vec4OrLessOrNumber<TNum extends NumType> = Vec3OrLessOrNumber<TNum> | Node<NumberToVec4<TNum>>;
@@ -92,6 +93,7 @@ type Vec4OrLessOrNumberParameterForNumType<TNum extends NumType> =
 // If the parameters are the same length, it gets converted to the first type
 
 interface AddSubMulDivNumberVec<TNum extends NumType> {
+    (a: Number<TNum>, b: Node<"float">, ...params: FloatNodeParameter[]): Node<"float">;
     (a: Number<TNum>, b: NumberParameterForNumType<TNum>, ...params: NumberParameterForNumType<TNum>[]): Node<TNum>;
     (
         a: Vec2OrLessOrNumber<TNum>,
@@ -111,6 +113,7 @@ interface AddSubMulDivNumberVec<TNum extends NumType> {
 }
 
 interface AddSubMulDivNumberVecNumExtensions<TNum extends NumType> {
+    (b: Node<"float">, ...params: FloatNodeParameter[]): Node<"float">;
     (b: NumberParameterForNumType<TNum>, ...params: NumberParameterForNumType<TNum>[]): Node<TNum>;
     (
         b: Vec2OrLessOrNumberParameterForNumType<TNum>,
@@ -438,8 +441,7 @@ declare module "../core/Node.js" {
 // Comparison operators
 
 interface ComparisonOperator {
-    (a: Number<"float">, b: Number<"float">): Node<"bool">;
-    (a: Number<"int"> | Number<"uint">, b: Number<"int"> | Number<"uint">): Node<"bool">;
+    (a: FloatNodeParameter, b: FloatNodeParameter): Node<"bool">;
 }
 export const equal: ComparisonOperator;
 export const notEqual: ComparisonOperator;
@@ -449,7 +451,7 @@ export const lessThanEqual: ComparisonOperator;
 export const greaterThanEqual: ComparisonOperator;
 
 interface ComparisonOperatorNumExtensions<TNum extends NumType> {
-    (b: Number<TNum>): Node<"bool">;
+    (b: FloatNodeParameter): Node<"bool">;
 }
 
 declare module "../core/Node.js" {
@@ -463,21 +465,21 @@ declare module "../core/Node.js" {
     }
 
     interface IntExtensions {
-        equal: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        notEqual: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        lessThan: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        greaterThan: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        lessThanEqual: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        greaterThanEqual: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
+        equal: ComparisonOperatorNumExtensions<"int">;
+        notEqual: ComparisonOperatorNumExtensions<"int">;
+        lessThan: ComparisonOperatorNumExtensions<"int">;
+        greaterThan: ComparisonOperatorNumExtensions<"int">;
+        lessThanEqual: ComparisonOperatorNumExtensions<"int">;
+        greaterThanEqual: ComparisonOperatorNumExtensions<"int">;
     }
 
     interface UintExtensions {
-        equal: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        notEqual: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        lessThan: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        greaterThan: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        lessThanEqual: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
-        greaterThanEqual: (b: Number<"int"> | Number<"uint">) => Node<"bool">;
+        equal: ComparisonOperatorNumExtensions<"uint">;
+        notEqual: ComparisonOperatorNumExtensions<"uint">;
+        lessThan: ComparisonOperatorNumExtensions<"uint">;
+        greaterThan: ComparisonOperatorNumExtensions<"uint">;
+        lessThanEqual: ComparisonOperatorNumExtensions<"uint">;
+        greaterThanEqual: ComparisonOperatorNumExtensions<"uint">;
     }
 }
 
