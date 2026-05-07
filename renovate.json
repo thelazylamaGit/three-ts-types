@@ -31,12 +31,12 @@
             "enabled": false
         },
         {
-            "matchPackageNames": ["@needle-tools/gltf-progressive"],
+            "matchPackageNames": ["@needle-tools/gltf-progressive", "@needle-tools/three-animation-pointer"],
             "matchUpdateTypes": ["major", "minor"],
             "enabled": false
         },
         {
-            "matchPackageNames": ["@needle-tools/three-animation-pointer"],
+            "matchPackageNames": ["@perplexdotgg/bounce"],
             "matchUpdateTypes": ["major", "minor"],
             "enabled": false
         },

@@ -131,6 +131,7 @@ export interface WebGLProgramParameters {
     //
 
     vertexTangents: boolean;
+    vertexNormals: boolean;
     vertexColors: boolean;
     vertexAlphas: boolean;
     vertexUv1s: boolean;
@@ -170,6 +171,8 @@ export interface WebGLProgramParameters {
     numSpotLightShadowsWithMaps: number;
 
     numLightProbes: number;
+
+    numLightProbeGrids: number;
 
     numClippingPlanes: number;
     numClipIntersection: number;
@@ -224,6 +227,7 @@ export class WebGLPrograms {
         shadows: Light[],
         scene: Scene,
         object: Object3D,
+        lightProbeGrids: unknown[],
     ): WebGLProgramParameters;
 
     getProgramCacheKey(parameters: WebGLProgramParameters): string;

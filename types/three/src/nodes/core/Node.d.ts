@@ -70,12 +70,16 @@ export interface NodeChild {
     childNode: Node;
 }
 
+export interface NodeClassEventMap {
+    dispose: {};
+}
+
 /**
  * Base class for all nodes.
  *
  * @augments EventDispatcher
  */
-declare class NodeClass extends EventDispatcher<{ dispose: {} }> {
+declare class NodeClass<TEventMap extends NodeClassEventMap = NodeClassEventMap> extends EventDispatcher<TEventMap> {
     static get type(): string;
     /**
      * Constructs a new node.
@@ -234,7 +238,7 @@ declare class NodeClass extends EventDispatcher<{ dispose: {} }> {
      * @param {Function} callback - The update method.
      * @return {Node} A reference to this node.
      */
-    onFrameUpdate(callback: (this: this, frame: NodeFrame) => void): this;
+    onFrameUpdate(callback: (this: this, frame: NodeFrame) => unknown): this;
     /**
      * Convenient method for defining {@link Node#update}. Similar to {@link Node#onUpdate}, but
      * this method automatically sets the update type to `RENDER`.
@@ -242,7 +246,7 @@ declare class NodeClass extends EventDispatcher<{ dispose: {} }> {
      * @param {Function} callback - The update method.
      * @return {Node} A reference to this node.
      */
-    onRenderUpdate(callback: (this: this, frame: NodeFrame) => void): this;
+    onRenderUpdate(callback: (this: this, frame: NodeFrame) => unknown): this;
     /**
      * Convenient method for defining {@link Node#update}. Similar to {@link Node#onUpdate}, but
      * this method automatically sets the update type to `OBJECT`.
@@ -250,7 +254,7 @@ declare class NodeClass extends EventDispatcher<{ dispose: {} }> {
      * @param {Function} callback - The update method.
      * @return {Node} A reference to this node.
      */
-    onObjectUpdate(callback: (this: this, frame: NodeFrame) => void): this;
+    onObjectUpdate(callback: (this: this, frame: NodeFrame) => unknown): this;
     /**
      * Convenient method for defining {@link Node#updateReference}.
      *
