@@ -2084,8 +2084,8 @@ interface Vec4Function {
     (x: Scalar, y: Scalar, zw: Node<"vec2"> | Vector2): VarNode<"vec4", JoinNode<"vec4">>;
     (xy: Node<"vec2"> | Vector2, zw: Node<"vec2"> | Vector2): VarNode<"vec4", JoinNode<"vec4">>;
     (xy: Node<"vec2"> | Vector2, z: Scalar, w: Scalar): VarNode<"vec4", JoinNode<"vec4">>;
-    (xyz: Node<"vec3"> | Node<"color"> | Vector3 | Color, w: Scalar): VarNode<"vec4", JoinNode<"vec4">>;
-    (x: Scalar, yzw: Node<"vec3"> | Node<"color"> | Vector3 | Color): VarNode<"vec4", JoinNode<"vec4">>;
+    (xyz: Node<"vec3"> | Node<"color"> | Node<"vec3" | "color"> | Vector3 | Color, w: Scalar): VarNode<"vec4", JoinNode<"vec4">>;
+    (x: Scalar, yzw: Node<"vec3"> | Node<"color"> | Node<"vec3" | "color"> | Vector3 | Color): VarNode<"vec4", JoinNode<"vec4">>;
 }
 
 export const vec4: Vec4Function;
